@@ -39,13 +39,20 @@ public String toString(){
       Note the helper function has the same name, but different parameters.
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
+
+    //find the location of the S.
+    //erase the S
+    //and start solving at the location of the s.
+    //return solve(???,???);
     public int solve(){
-            //find the location of the S.
-
-            //erase the S
-
-            //and start solving at the location of the s.
-            //return solve(???,???);
+      for (int i = 0; i < maze.length; i++){
+        for (int x = 0; x < maze[i].length; x++){
+          if (maze[i][x] = 's'){
+            maze[i][x] = ' ';
+          return solve(i, x);
+        }
+        }
+      }
     }
 
     /*
