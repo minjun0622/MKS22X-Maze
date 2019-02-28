@@ -25,7 +25,6 @@ public String toString(){
 
 }
 
-
     public int solve(){
       for (int i = 0; i < maze.length; i++){
         for (int x = 0; x < maze[i].length; x++){
@@ -36,6 +35,8 @@ public String toString(){
       }
     }
   }
+  
+  //helper method that checks for white space to see if there are any other moves available.
   private boolean solved() {
     for (int i = 0; i < maze.length; i++){
       for (int x = 0; x < board[i].length; x++){
@@ -61,6 +62,13 @@ public String toString(){
         All visited spots that are part of the solution are changed to '@'
     */
     //thinking of a way for a way to count the moves so when you trace back it helps you.
+    /*
+    up = maze[i - 1][x]
+    down = maze[i + 1][x]
+    left = maze [i][x - 1]
+    right = maze[i][x + 1]
+    how can you use the helper method and also the third parameter to help solve the maze?
+    */
     private int solve(int row, int col, int moves){
         if(animate){
             clearTerminal();
@@ -70,9 +78,15 @@ public String toString(){
         if (maze[row][col + 1] != '#') {
           maze[row][col] = '@';
           if (solved()) {
-          solve(row, col + 1, moves);
+          solve(row, col + 1, moves + 1);
         }
       }
+        if (maze[row + 1][col] != '#'){
+          maze[row][col] = '@';
+          if (solved()) {
+            solve(row + 1, col, moves + 1);
+          }
+        }
 
         //if there is no solution.
         if (moves == 0) {
