@@ -5,26 +5,15 @@ public class Maze {
   private boolean animate;
 
   public Maze(String filename) throws FileNotFoundException{
-    File f = new File(filename);
-    if (/* find a way for it to make file not valid or not found*/) {
+    if (filename != /* not a valid file. */) {
       throw new FileNotFoundException();
     }
-    Scanner d = new Scanner(d);
-    setAnimate(false);
+    animate = false;
   }
 
   public void setAnimate(boolean b){
     animate = b;
   }
-
-  private void wait(int millis){
-    try {
-      Thread.sleep(millis);
-      }
-      catch (InterruptedException e) {
-      }
-    }
-
     public void clearTerminal(){
       //erase terminal, go to top left of screen.
       System.out.println("\033[2J\033[1;1H");
@@ -33,27 +22,30 @@ public class Maze {
 //change the textfile that constructor received and change the characters.
 public String toString(){
   String result;
+
 }
 
-/*Wrapper Solve Function returns the helper function
-      Note the helper function has the same name, but different parameters.
-      Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
-    */
 
-    //find the location of the S.
-    //erase the S
-    //and start solving at the location of the s.
-    //return solve(???,???);
     public int solve(){
       for (int i = 0; i < maze.length; i++){
         for (int x = 0; x < maze[i].length; x++){
-          if (maze[i][x] = 's'){
+          if (maze[i][x] = 'S'){
             maze[i][x] = ' ';
-          return solve(i, x);
-        }
+          return solve(i, x, 0);
         }
       }
     }
+  }
+  private boolean solved() {
+    for (int i = 0; i < maze.length; i++){
+      for (int x = 0; x < board[i].length; x++){
+        if (maze[i][x] = ' '){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
     /*
       Recursive Solve function:
@@ -68,16 +60,33 @@ public String toString(){
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){
+    //thinking of a way for a way to count the moves so when you trace back it helps you.
+    private int solve(int row, int col, int moves){
         if(animate){
             clearTerminal();
             System.out.println(this);
             wait(20);
         }
+        if (maze[row][col + 1] != '#') {
+          maze[row][col] = '@';
+          if (solved()) {
+          solve(row, col + 1, moves);
+        }
+      }
 
-        //COMPLETE SOLVE
-        return -1; //so it compiles
+        //if there is no solution.
+        if (moves == 0) {
+          return -1;
+        }
     }
+    private void wait(int millis){
+      try {
+        Thread.sleep(millis);
+        }
+        catch (InterruptedException e) {
+        }
+      }
+
 
 
 
