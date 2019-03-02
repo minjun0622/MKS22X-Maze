@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+
 public class Maze {
   private char[][]maze;
   private boolean animate;
@@ -14,6 +15,7 @@ public class Maze {
   public void setAnimate(boolean b){
     animate = b;
   }
+
     public void clearTerminal(){
       //erase terminal, go to top left of screen.
       System.out.println("\033[2J\033[1;1H");
@@ -21,8 +23,13 @@ public class Maze {
 
 //change the textfile that constructor received and change the characters.
 public String toString(){
-  String result;
-
+  String result = "";
+  for (int i = 0; i < maze.length; i++){
+    for (int x = 0; x < maze[i].length; x++){
+      result += maze[i][x];
+    }
+    result += "\n";
+  }
 }
 
     public int solve(){
@@ -35,7 +42,7 @@ public String toString(){
       }
     }
   }
-  
+
   //helper method that checks for white space to see if there are any other moves available.
   private boolean solved() {
     for (int i = 0; i < maze.length; i++){
