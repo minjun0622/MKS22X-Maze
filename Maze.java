@@ -2,21 +2,24 @@ import java.util.*;
 import java.io.*;
 
 public class Maze {
-  private char[][]maze;
+  private char[][] maze;
   private boolean animate;
   private int moves;
-  private int[][] move = {{0, 1} {1, 0}, {0, -1}, {-1, 0}};
+  private int[][] move = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
   public Maze(String filename) throws FileNotFoundException{
+    int row = 0;
+    int col = 0;
     moves = 0;
     File f = new File(filename);
     Scanner s = new Scanner(f);
     while (s.hasNextLine()){
       row++;
-      String result = s.NextLine();
+      String result = s.nextLine();
       col = String.length();
     }
-    maze[row][col];
+    maze = new char[row][col];
+    s = new Scanner(f);
     int scount = 0;
     int ecount = 0;
     for (int i = 0; i < row; i++){
@@ -34,7 +37,6 @@ public class Maze {
         }
       }
     }
-
     animate = false;
   }
 
@@ -51,11 +53,12 @@ public class Maze {
 public String toString(){
   String result = "";
   for (int i = 0; i < maze.length; i++){
+    result += "\n";
     for (int x = 0; x < maze[i].length; x++){
       result += maze[i][x];
     }
-    result += "\n";
   }
+  return result;
 }
 
     public int solve(){
@@ -63,10 +66,11 @@ public String toString(){
       int c = 0;
       for (int i = 0; i < maze.length; i++){
         for (int x = 0; x < maze[i].length; x++){
-          if (maze[i][x] = 'S'){
+          if (maze[i][x] == 'S'){
             r = i;
             c = x;
             maze[i][x] = ' ';
+            break;
           }
         }
       }
@@ -105,10 +109,10 @@ public String toString(){
           return 1;
         }
         if (maze[row][col] == ' '){
-          move[row][col] == '@';
+          move[row][col] = '@';
           moves++;
           for (int i = 0; i < 4; i++){
-            if (solve(row + move[i][0], col + move[i][1) != -1){
+            if (solve(row + move[i][0], col + move[i][1]) != -1){
               return moves;
             }
           }
@@ -117,6 +121,7 @@ public String toString(){
         }
         return -1;
     }
+
     private void wait(int millis){
       try {
         Thread.sleep(millis);
@@ -125,25 +130,25 @@ public String toString(){
         }
       }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      public static void main(String args[]) {
+   try {
+     Maze test = new Maze("Maze1.txt");
+     Maze test1 = new Maze("data1.dat");
+     Maze test2 = new Maze("data2.dat");
+     Maze test3 = new Maze("data3.dat");
+ //    test2.setAnimate(true);
+     System.out.println(test.solve());
+     System.out.println(test1.solve());
+     System.out.println(test2.solve());
+     System.out.println(test3.solve());
+     System.out.println(test);
+     System.out.println(test1);
+     System.out.println(test2);
+     System.out.println(test3);
+   }
+   catch (FileNotFoundException e) {
+     System.out.println("File not found");
+   }
+ }
 
 }
