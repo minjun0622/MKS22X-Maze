@@ -6,8 +6,12 @@ public class Maze {
   private boolean animate;
 
   public Maze(String filename) throws FileNotFoundException{
-    if (filename != /* not a valid file. */) {
-      throw new FileNotFoundException();
+    File f = new File(filename);
+    Scanner s = new Scanner(f);
+    String result = "";
+    while (s.hasNextLine()){
+      result += s.NextLine();
+      result += "\n";
     }
     animate = false;
   }
@@ -33,27 +37,20 @@ public String toString(){
 }
 
     public int solve(){
+      int r = 0;
+      int c = 0;
       for (int i = 0; i < maze.length; i++){
         for (int x = 0; x < maze[i].length; x++){
           if (maze[i][x] = 'S'){
+            r = i;
+            c = x;
             maze[i][x] = ' ';
-          return solve(i, x, 0);
+          }
         }
       }
-    }
-  }
+          return solve(r, c);
+        }
 
-  //helper method that checks for white space to see if there are any other moves available.
-  private boolean solved() {
-    for (int i = 0; i < maze.length; i++){
-      for (int x = 0; x < board[i].length; x++){
-        if (maze[i][x] = ' '){
-          return true;
-        }
-      }
-    }
-    return false;
-  }
 
     /*
       Recursive Solve function:
@@ -76,18 +73,16 @@ public String toString(){
     right = maze[i][x + 1]
     how can you use the helper method and also the third parameter to help solve the maze?
     */
-    private int solve(int row, int col, int moves){
+    private int solve(int row, int col){
         if(animate){
             clearTerminal();
             System.out.println(this);
             wait(20);
         }
-        if (maze[row][col + 1] != '#') {
-          maze[row][col] = '@';
-          if (solved()) {
-          solve(row, col + 1, moves + 1);
+        if (maze[row][col] == 'E') {
+          return 1;
         }
-      }
+        if (maze[row][col] == )
         if (maze[row + 1][col] != '#'){
           maze[row][col] = '@';
           if (solved()) {
