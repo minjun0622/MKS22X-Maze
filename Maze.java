@@ -5,16 +5,36 @@ public class Maze {
   private char[][]maze;
   private boolean animate;
   private int moves;
+  private int[][] move = {{0, 1} {1, 0}, {0, -1}, {-1, 0}};
 
   public Maze(String filename) throws FileNotFoundException{
     moves = 0;
     File f = new File(filename);
     Scanner s = new Scanner(f);
-    String result = "";
     while (s.hasNextLine()){
-      result += s.NextLine();
-      result += "\n";
+      row++;
+      String result = s.NextLine();
+      col = String.length();
     }
+    maze[row][col];
+    int scount = 0;
+    int ecount = 0;
+    for (int i = 0; i < row; i++){
+      String result = s.nextLine();
+      for (int x = 0; x < s.length(); x++){
+        maze[i][x] = line.charAt(x);
+        if (maze[i][x] == 'S'){
+          scount++;
+        }
+        if (maze[i][x] == 'E') {
+          ecount++;
+        }
+        if (ecount + scount != 2){
+          throw new IllegalStateException();
+        }
+      }
+    }
+
     animate = false;
   }
 
