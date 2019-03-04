@@ -8,15 +8,16 @@ public class Maze {
   private int[][] move = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
   public Maze(String filename) throws FileNotFoundException{
+    moves = 0;
+    animate = false;
     int row = 0;
     int col = 0;
-    moves = 0;
     File f = new File(filename);
     Scanner s = new Scanner(f);
     while (s.hasNextLine()){
       row++;
       String result = s.nextLine();
-      col = String.length();
+      col = result.length();
     }
     maze = new char[row][col];
     s = new Scanner(f);
@@ -24,20 +25,19 @@ public class Maze {
     int ecount = 0;
     for (int i = 0; i < row; i++){
       String result = s.nextLine();
-      for (int x = 0; x < s.length(); x++){
-        maze[i][x] = line.charAt(x);
+      for (int x = 0; x < result.length(); x++){
+        maze[i][x] = result.charAt(x);
         if (maze[i][x] == 'S'){
           scount++;
         }
         if (maze[i][x] == 'E') {
           ecount++;
         }
+      }
+    }
         if (ecount + scount != 2){
           throw new IllegalStateException();
         }
-      }
-    }
-    animate = false;
   }
 
   public void setAnimate(boolean b){
@@ -116,7 +116,7 @@ public String toString(){
               return moves;
             }
           }
-          moves[row][col] = '.';
+          maze[row][col] = '.';
           moves--;
         }
         return -1;
@@ -150,5 +150,4 @@ public String toString(){
      System.out.println("File not found");
    }
  }
-
 }
