@@ -5,13 +5,17 @@ public class Maze {
   private char[][] maze;
   private boolean animate;
   private int moves;
-  private int[][] move = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+  private int[][] move;
 
   public Maze(String filename) throws FileNotFoundException{
+    int[][] solver  = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    move = solver;
     moves = 0;
     animate = false;
     int row = 0;
     int col = 0;
+
     File f = new File(filename);
     Scanner s = new Scanner(f);
     while (s.hasNextLine()){
@@ -109,7 +113,7 @@ public String toString(){
           return 1;
         }
         if (maze[row][col] == ' '){
-          move[row][col] = '@';
+          maze[row][col] = '@';
           moves++;
           for (int i = 0; i < 4; i++){
             if (solve(row + move[i][0], col + move[i][1]) != -1){
@@ -133,8 +137,11 @@ public String toString(){
       public static void main(String args[]) {
    try {
      Maze test = new Maze("Maze1.txt");
+     System.out.print(test);
      Maze test1 = new Maze("data1.dat");
+      System.out.print(test1);
      Maze test2 = new Maze("data2.dat");
+      System.out.print(test2);
      Maze test3 = new Maze("data3.dat");
  //    test2.setAnimate(true);
      System.out.println(test.solve());

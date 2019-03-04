@@ -8,7 +8,7 @@ public class Driver{
         f.setAnimate(true);
         f.solve();
         System.out.println(f);
-      }catch(FileNotFoundException e){
+      }catch (FileNotFoundException e){
         System.out.println("Invalid filename: "+filename);
       }
     }
