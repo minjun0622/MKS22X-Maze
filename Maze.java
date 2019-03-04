@@ -4,8 +4,10 @@ import java.io.*;
 public class Maze {
   private char[][]maze;
   private boolean animate;
+  private int moves;
 
   public Maze(String filename) throws FileNotFoundException{
+    moves = 0;
     File f = new File(filename);
     Scanner s = new Scanner(f);
     String result = "";
@@ -82,18 +84,18 @@ public String toString(){
         if (maze[row][col] == 'E') {
           return 1;
         }
-        if (maze[row][col] == )
-        if (maze[row + 1][col] != '#'){
-          maze[row][col] = '@';
-          if (solved()) {
-            solve(row + 1, col, moves + 1);
+        if (maze[row][col] == ' '){
+          move[row][col] == '@';
+          moves++;
+          for (int i = 0; i < 4; i++){
+            if (solve(row + move[i][0], col + move[i][1) != -1){
+              return moves;
+            }
           }
+          moves[row][col] = '.';
+          moves--;
         }
-
-        //if there is no solution.
-        if (moves == 0) {
-          return -1;
-        }
+        return -1;
     }
     private void wait(int millis){
       try {
